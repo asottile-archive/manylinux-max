@@ -25,3 +25,12 @@ def test_environment_variable_is_garbage():
 
     msg, = excinfo.value.args
     assert msg == 'invalid MANYLINUX_MAX, expected `#.##` got `garbage`'
+
+
+def test_environment_variable_non_dot():
+    with mock.patch.dict(os.environ, {'MANYLINUX_MAX': '2_28'}):
+        with pytest.raises(ValueError) as excinfo:
+            manylinux_compatible(2, 28, 'x86_64')
+
+    msg, = excinfo.value.args
+    assert msg == 'invalid MANYLINUX_MAX, expected `#.##` got `2_28`'

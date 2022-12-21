@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import re
 
-PATTERN = re.compile(r'^(\d+).(\d+)$', re.ASCII)
+PATTERN = re.compile(r'^(\d+)\.(\d+)$', re.ASCII)
 
 
 def manylinux_compatible(major: int, minor: int, arch: str) -> bool:
